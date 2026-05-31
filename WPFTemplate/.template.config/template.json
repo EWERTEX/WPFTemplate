@@ -1,13 +1,18 @@
 {
-  "$schema": "http://json.schemastore.org/template",
-  "author": "EWERTEX",
-  "classifications": ["WPF", "Template"],
-  "identity": "WPFTemplate",
-  "name": "WPF Template Base Project",
-  "shortName": "wpftemp",
-  "tags": {
-    "language": "C#",
-    "type": "project"
-  },
-  "sourceName": "WPFTemplate"
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Microsoft",
+	"classifications": [
+		"WPF",
+		"Windows",
+		"Desktop"
+	],
+	"identity": "Microsoft.Wpf.Mvvm.CSharp",
+	"name": "WPF Application (MVVM Toolkit)",
+	"shortName": "wpfmvvm",
+	"description": "A project for creating a .NET WPF Application using the MVVM architectural pattern and Data Binding.",
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"sourceName": "WPFTemplate"
 }
