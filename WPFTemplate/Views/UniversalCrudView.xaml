@@ -17,7 +17,7 @@
                   ItemsSource="{Binding ItemsView}" 
                   SelectedItem="{Binding SelectedItem}"
                   AutoGenerateColumns="True" 
-                  AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"
+                  AutoGeneratingColumn="DataGridAutoGeneratingColumn"
                   CanUserAddRows="True" 
                   CanUserDeleteRows="True">
         </DataGrid>

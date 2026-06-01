@@ -51,7 +51,7 @@ namespace WPFTemplate.ViewModels
                 return;
             }
             
-            if (IsCaptchaVisible && UserCaptchaInput.ToUpper() != CaptchaText)
+            if (IsCaptchaVisible && !UserCaptchaInput.Equals(CaptchaText, StringComparison.CurrentCultureIgnoreCase))
             {
                 HandleFailedAttempt("Неверная капча!");
                 return;
@@ -64,11 +64,10 @@ namespace WPFTemplate.ViewModels
                 if (user != null)
                 {
                     SessionContext.CurrentUser = user;
-                    SessionContext.RoleName = user.Role.Name; // Адаптируй под свои таблицы
+                    SessionContext.RoleName = user.Role.Name;
                     
-                    // Переход на главное окно
-                    // var mainWindow = new Views.MainWindow();
-                    // mainWindow.Show();
+                    var mainWindow = new Views.MainWindow();
+                    mainWindow.Show();
                     
                     CloseAction?.Invoke();
                     return;

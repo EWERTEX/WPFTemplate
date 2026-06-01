@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Microsoft.EntityFrameworkCore;
 using WPFTemplate.Helpers;
 
 namespace WPFTemplate.ViewModels
@@ -9,11 +10,17 @@ namespace WPFTemplate.ViewModels
         public object CurrentView { get => _currentView; set { _currentView = value; OnPropertyChanged(); } }
         
         private double _menuWidth = 200;
+        //private DbContext _db = new DbContext();
+        private Visibility _menuContentVisibility = Visibility.Visible;
+        public Visibility MenuContentVisibility { get => _menuContentVisibility; set { _menuContentVisibility = value; OnPropertyChanged(); } }
+        
         public double MenuWidth { get => _menuWidth; set { _menuWidth = value; OnPropertyChanged(); } }
         
         public Visibility AdminVisibility => SessionContext.RoleName == "Администратор" ? Visibility.Visible : Visibility.Collapsed;
         public Visibility ManagerVisibility => (SessionContext.RoleName == "Администратор" || SessionContext.RoleName == "Менеджер") ? Visibility.Visible : Visibility.Collapsed;
 
+        
+        
         public string CurrentUserName => $"Пользователь: {SessionContext.RoleName}"; // Можно добавить ФИО
 
         public RelayCommand ToggleMenuCommand { get; }
@@ -21,14 +28,26 @@ namespace WPFTemplate.ViewModels
         public RelayCommand LogoutCommand { get; }
         public RelayCommand GenerateReportCommand { get; }
 
-        public MainViewModel(RelayCommand generateReportCommand)
+        public MainViewModel()
         {
-	        GenerateReportCommand = generateReportCommand;
 	        ToggleMenuCommand = new RelayCommand(_ => MenuWidth = MenuWidth == 200 ? 50 : 200);
             NavigateCommand = new RelayCommand(Navigate);
             LogoutCommand = new RelayCommand(Logout);
+            GenerateReportCommand = new RelayCommand(GenerateTestReport);
+            // CurrentView = new UniversalCrudViewModel<User>(_db);
             
-            // CurrentView = new UniversalCrudViewModel<User>();
+            ToggleMenuCommand = new RelayCommand(_ => 
+            {
+	            if (MenuWidth == 200)
+	            {
+		            MenuContentVisibility = Visibility.Collapsed;
+	            }
+	            else
+	            {
+		            MenuWidth = 200;
+		            MenuContentVisibility = Visibility.Visible;
+	            }
+            });
         }
 
         private void Navigate(object? viewName)
@@ -38,8 +57,8 @@ namespace WPFTemplate.ViewModels
 		        CurrentView = new EmulatorViewModel();
 	        }
 	        
-            /* if (viewName.ToString() == "Users") CurrentView = new UniversalCrudViewModel<User>(db.Users.ToList());
-            if (viewName.ToString() == "Products") CurrentView = new UniversalCrudViewModel<Product>(db.Products.ToList());
+            /* if (viewName.ToString() == "Users") CurrentView = new UniversalCrudViewModel<User>(_db);
+            if (viewName.ToString() == "Products") CurrentView = new UniversalCrudViewModel<Product>(_db);
             */
         }
 

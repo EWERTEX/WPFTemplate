@@ -1,45 +1,49 @@
 ﻿<Window x:Class="WPFTemplate.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Информационная система" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="Информационная система" Height="600" Width="1000" WindowStartupLocation="CenterScreen"
+        Icon="/Resources/icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding MenuWidth}"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{Binding MenuWidth}" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" Background="#2C3E50">
             <StackPanel>
-                <Button Content="≡" Command="{Binding ToggleMenuCommand}" 
-                        Background="Transparent" Foreground="White" FontSize="20" HorizontalAlignment="Right" Margin="5"/>
-                
-                <TextBlock Text="{Binding CurrentUserName}" Foreground="White" Margin="10" TextWrapping="Wrap"/>
-                <Separator Background="Gray" Margin="10,0"/>
+                <Button Content="≡" Command="{Binding ToggleMenuCommand}"
+                        Background="Transparent" Foreground="White" FontSize="20" HorizontalAlignment="Right"
+                        Margin="5" />
 
-                <Button Content="Пользователи" Command="{Binding NavigateCommand}" CommandParameter="Users" 
-                        Visibility="{Binding AdminVisibility}" 
-                        Background="Transparent" Foreground="White" Margin="0,5"/>
-                
-                <Button Content="Товары" Command="{Binding NavigateCommand}" CommandParameter="Products" 
-                        Visibility="{Binding ManagerVisibility}" 
-                        Background="Transparent" Foreground="White" Margin="0,5"/>
-                
-                <Button Content="Заказы" Command="{Binding NavigateCommand}" CommandParameter="Orders" 
-                        Background="Transparent" Foreground="White" Margin="0,5"/>
+                <StackPanel Visibility="{Binding MenuContentVisibility}">
+                    <TextBlock Text="{Binding CurrentUserName}" Foreground="White" Margin="10" TextWrapping="Wrap" />
+                    <Separator Background="Gray" Margin="10,0" />
 
-                <Button Content="Эмулятор API" Command="{Binding NavigateCommand}" CommandParameter="Emulator" 
-                        Background="Transparent" Foreground="White" Margin="0,5"/>
-                
-                <Button Content="Экспорт ТестКейс (Word)" Command="{Binding GenerateReportCommand}" 
-                        Background="#8E44AD" Foreground="White" Margin="10,20,10,5" FontWeight="Bold"/>
-                
-                <Button Content="Выход" Command="{Binding LogoutCommand}" 
-                        Background="#E74C3C" Foreground="White" Margin="10,30,10,0"/>
+                    <Button Content="Пользователи" Command="{Binding NavigateCommand}" CommandParameter="Users"
+                            Visibility="{Binding AdminVisibility}"
+                            Background="Transparent" Foreground="White" Margin="0,5" />
+
+                    <Button Content="Товары" Command="{Binding NavigateCommand}" CommandParameter="Products"
+                            Visibility="{Binding ManagerVisibility}"
+                            Background="Transparent" Foreground="White" Margin="0,5" />
+
+                    <Button Content="Заказы" Command="{Binding NavigateCommand}" CommandParameter="Orders"
+                            Background="Transparent" Foreground="White" Margin="0,5" />
+
+                    <Button Content="Эмулятор API" Command="{Binding NavigateCommand}" CommandParameter="Emulator"
+                            Background="Transparent" Foreground="White" Margin="0,5" />
+
+                    <Button Content="Экспорт ТестКейс (Word)" Command="{Binding GenerateReportCommand}"
+                            Background="#8E44AD" Foreground="White" Margin="10,20,10,5" FontWeight="Bold" />
+
+                    <Button Content="Выход" Command="{Binding LogoutCommand}"
+                            Background="#E74C3C" Foreground="White" Margin="10,30,10,0" />
+                </StackPanel>
             </StackPanel>
         </Border>
 
         <Border Grid.Column="1" Background="#ECF0F1" Padding="10">
-            <ContentControl Content="{Binding CurrentView}"/>
+            <ContentControl Content="{Binding CurrentView}" />
         </Border>
     </Grid>
 </Window>
