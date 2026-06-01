@@ -2,11 +2,12 @@
 {
 	public static class SessionContext
 	{
-		public static string RoleName { get; set; } = "Гость";
+		//public static User CurrentUser { get; set; }
+		public static int RoleId { get; set; }
 
 		public static void Clear()
 		{
-			RoleName = "Гость";
+			RoleId = 0;
 		}
 	}
 }

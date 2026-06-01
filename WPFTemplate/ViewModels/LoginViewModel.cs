@@ -64,7 +64,7 @@ namespace WPFTemplate.ViewModels
                 if (user != null)
                 {
                     SessionContext.CurrentUser = user;
-                    SessionContext.RoleName = user.Role.Name;
+                    SessionContext.RoleId = user.Role.Name;
                     
                     var mainWindow = new Views.MainWindow();
                     mainWindow.Show();

@@ -19,7 +19,7 @@
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
                     <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" Width="*"/>
                     <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
-                    <DataGridTextColumn Header="Роль" Binding="{Binding RoleName}" Width="Auto"/>
+                    <DataGridTextColumn Header="Роль" Binding="{Binding RoleId}" Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

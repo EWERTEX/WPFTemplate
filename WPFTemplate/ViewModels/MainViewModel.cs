@@ -16,12 +16,12 @@ namespace WPFTemplate.ViewModels
         
         public double MenuWidth { get => _menuWidth; set { _menuWidth = value; OnPropertyChanged(); } }
         
-        public Visibility AdminVisibility => SessionContext.RoleName == "Администратор" ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility ManagerVisibility => (SessionContext.RoleName == "Администратор" || SessionContext.RoleName == "Менеджер") ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility AdminVisibility => SessionContext.RoleId == 1 ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility ManagerVisibility => (SessionContext.RoleId == 1 || SessionContext.RoleId == 2) ? Visibility.Visible : Visibility.Collapsed;
 
         
         
-        public string CurrentUserName => $"Пользователь: {SessionContext.RoleName}"; // Можно добавить ФИО
+        public string CurrentUserName => $"Пользователь: {SessionContext.RoleId}";
 
         public RelayCommand ToggleMenuCommand { get; }
         public RelayCommand NavigateCommand { get; }
@@ -30,7 +30,6 @@ namespace WPFTemplate.ViewModels
 
         public MainViewModel()
         {
-	        ToggleMenuCommand = new RelayCommand(_ => MenuWidth = MenuWidth == 200 ? 50 : 200);
             NavigateCommand = new RelayCommand(Navigate);
             LogoutCommand = new RelayCommand(Logout);
             GenerateReportCommand = new RelayCommand(GenerateTestReport);
@@ -40,6 +39,7 @@ namespace WPFTemplate.ViewModels
             {
 	            if (MenuWidth == 200)
 	            {
+		            MenuWidth = 40;
 		            MenuContentVisibility = Visibility.Collapsed;
 	            }
 	            else
